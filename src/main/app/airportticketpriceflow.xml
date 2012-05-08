@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:jdbc="http://www.mulesoft.org/schema/mule/jdbc" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:test="http://www.mulesoft.org/schema/mule/test" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/3.2/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/jdbc http://www.mulesoft.org/schema/mule/jdbc/3.2/mule-jdbc.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/3.2/mule-jms.xsd 
+http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/3.2/mule-jersey.xsd 
+http://www.mulesoft.org/schema/mule/test http://www.mulesoft.org/schema/mule/test/3.2/mule-test.xsd ">
+    <spring:beans>
+        <spring:bean id="UnitedPriceBean" class="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" doc:name="UnitedPriceBean">
+            <spring:property name="priceMap">
+                <spring:map>
+                    <spring:entry key="LAX">
+                        <spring:value>550</spring:value>
+                    </spring:entry>
+                    <spring:entry key="KOA">
+                        <spring:value>1500</spring:value>
+                    </spring:entry>
+                    <spring:entry key="SFO">
+                        <spring:value>400</spring:value>
+                    </spring:entry>
+                    <spring:entry key="OAK">
+                        <spring:value>300</spring:value>
+                    </spring:entry>
+                </spring:map>
+            </spring:property>
+        </spring:bean>
+        <spring:bean id="DeltaPriceBean" class="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" doc:name="DeltaPriceBean">
+            <spring:property name="priceMap">
+                <spring:map>
+                    <spring:entry key="LAX">
+                        <spring:value>525</spring:value>
+                    </spring:entry>
+                    <spring:entry key="KOA">
+                        <spring:value>1450</spring:value>
+                    </spring:entry>
+                    <spring:entry key="SFO">
+                        <spring:value>350</spring:value>
+                    </spring:entry>
+                    <spring:entry key="OAK">
+                        <spring:value>325</spring:value>
+                    </spring:entry>
+                </spring:map>
+            </spring:property>
+        </spring:bean>
+        <spring:bean id="AlaskaPriceBean" class="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" doc:name="AlaskaPriceBean">
+            <spring:property name="priceMap">
+                <spring:map>
+                    <spring:entry key="LAX">
+                        <spring:value>578</spring:value>
+                    </spring:entry>
+                    <spring:entry key="KOA">
+                        <spring:value>1850</spring:value>
+                    </spring:entry>
+                    <spring:entry key="SFO">
+                        <spring:value>375</spring:value>
+                    </spring:entry>
+                    <spring:entry key="OAK">
+                        <spring:value>285</spring:value>
+                    </spring:entry>
+                </spring:map>
+            </spring:property>
+        </spring:bean>
+    </spring:beans>
+    <flow name="AirportTicketPriceFlow" doc:name="AirportTicketPriceFlow">
+        <!-- Simple Airline Price Aggregation Service to invoke from a browser - http://localhost:8444/?airportCode=LAX -->
+        <!-- Note: valid values for AirportCode include LAX, KOA, OAK, SFO -->
+        <http:inbound-endpoint exchange-pattern="request-response" address="http://localhost:8444" doc:name="PriceAggregatorRequest">
+            <not-filter> 
+                <wildcard-filter pattern="/favicon.ico"/> 
+            </not-filter>
+            <!-- Convert incoming http request string to parameter map -->
+            <http:body-to-parameter-map-transformer/>
+            <!-- Use expression transformer to retrieve the airportCode value -->
+            <expression-transformer evaluator="map-payload" expression="airportCode"/>
+            <response> 
+                <!-- Transform the message before responding to the consumer and set appropriate message properties-->  
+                <object-to-string-transformer/>  
+                <message-properties-transformer> 
+                    <add-message-property key="Content-Type" value="text/html"/> 
+                </message-properties-transformer> 
+            </response>
+        </http:inbound-endpoint>
+        <logger message="Payload BEFORE is: #[payload:]" level="INFO" doc:name="Log input payload"/>
+        <all doc:name="All">
+            <processor-chain>
+                <http:outbound-endpoint exchange-pattern="request-response" address="http://localhost:8050/price" doc:name="UnitedAirlinesPriceRequest">
+                    <cxf:jaxws-client serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice" operation="priceRequest"/>
+                </http:outbound-endpoint>
+            </processor-chain>
+            <processor-chain>
+                <http:outbound-endpoint exchange-pattern="request-response" address="http://localhost:8051/price" doc:name="DeltaAirlinesPriceRequest">
+                    <cxf:jaxws-client serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice" operation="priceRequest"/>
+                </http:outbound-endpoint>
+            </processor-chain>
+            <processor-chain>
+                <http:outbound-endpoint exchange-pattern="request-response" address="http://localhost:8052/price" doc:name="AlaskaAirlinesPriceRequest">
+                    <cxf:jaxws-client serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice" operation="priceRequest"/>
+                </http:outbound-endpoint>
+            </processor-chain>
+        </all>
+        <logger message="Payload AFTER is: #[payload:]" level="INFO" doc:name="Log output payload"/>
+    </flow>
+    <flow name="UnitedPriceService" doc:name="UnitedPriceService">
+        <http:inbound-endpoint exchange-pattern="request-response" address="http://localhost:8050/price" doc:name="HTTP">
+            <cxf:jaxws-service serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice"/>
+        </http:inbound-endpoint>
+        <component doc:name="CalculateAirportCodePrice">
+            <spring-object bean="UnitedPriceBean"/>
+        </component>
+        <expression-transformer evaluator="groovy" expression="'$' + payload + ' (USD) United Airlines'" doc:name="TransformResponse"/>
+    </flow>
+    <flow name="DeltaPriceService" doc:name="DeltaPriceService">
+        <http:inbound-endpoint exchange-pattern="request-response" address="http://localhost:8051/price" doc:name="HTTP">
+            <cxf:jaxws-service serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice"/>
+        </http:inbound-endpoint>
+        <component doc:name="CalculateAirportCodePrice">
+            <spring-object bean="DeltaPriceBean"/>
+        </component>
+        <expression-transformer evaluator="groovy" expression="'$' + payload + ' (USD) Delta Airlines'" doc:name="TransformResponse"/>
+    </flow>
+    <flow name="AlaskaPriceService" doc:name="AlaskaPriceService">
+        <http:inbound-endpoint exchange-pattern="request-response" address="http://localhost:8052/price" doc:name="HTTP">
+            <cxf:jaxws-service serviceClass="com.mulesoft.training.airportticketprice.SimpleTicketPrice"/>
+        </http:inbound-endpoint>
+        <component doc:name="CalculateAirportCodePrice">
+            <spring-object bean="AlaskaPriceBean"/>
+        </component>
+        <expression-transformer evaluator="groovy" expression="'$' + payload + ' (USD) Alaska Airlines'" doc:name="TransformResponse"/>
+    </flow>
+</mule>

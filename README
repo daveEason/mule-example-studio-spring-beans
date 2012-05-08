@@ -1,0 +1,23 @@
+## mule-example-studio-spring-beans
+
+This is a simple price aggregation service that demonstrates how to use Spring Beans within a Mule Application.
+
+Author: David Eason
+
+Please refer to Mulesoft.com for more details about Mule ESB.
+
+To install this application into Mule Studio please complete the following steps:
+
+- Clone/Import - After cloning from git, import to Mule Studio "File > Import > Mule > Mule Studio Project from External Location"
+
+To test simply start the application in Mule Studio "Run As > Mule Application", then invoke the following service from a web browser:
+
+- http://localhost:8444?airportCode=LAX
+
+- This will return a simple string (map) of values that represent the price each airline offers for flying to the nominated airport code.
+
+- The mock airlines being represented are United, Delta & Alaskan.
+
+- Note: Other valid airport codes are LAX, KOA, OAK, SFO
+
+- Note also: With the current version of Mule Studio 3.2.1 you will see some errors associated with the CXF components, which can be treated as warnings & ignored.

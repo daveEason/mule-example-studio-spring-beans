@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="AirportTicketPriceFlow">
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="UnitedPriceBean" entity-id="e146526b-015c-4c07-a747-faf1f6fdec84">
+        <properties>
+            <property value="UnitedPriceBean" name="id"/>
+            <property value="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="priceMap" name="name"/>
+                <property-collection name="@http://www.springframework.org/schema/beans/map;1">
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;2">
+                        <property value="KOA" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="1500" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;3">
+                        <property value="SFO" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="400" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;4">
+                        <property value="OAK" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="300" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;1">
+                        <property value="LAX" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="550" name=""/>
+                        </property-collection>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="DeltaPriceBean" entity-id="80f693ab-6b72-44c6-a164-0df8c3bc7238">
+        <properties>
+            <property value="DeltaPriceBean" name="id"/>
+            <property value="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="priceMap" name="name"/>
+                <property-collection name="@http://www.springframework.org/schema/beans/map;1">
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;2">
+                        <property value="KOA" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="1450" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;3">
+                        <property value="SFO" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="350" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;4">
+                        <property value="OAK" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="325" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;1">
+                        <property value="LAX" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="525" name=""/>
+                        </property-collection>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="AlaskaPriceBean" entity-id="83f92140-ccc3-4dbc-b65f-430247f495d6">
+        <properties>
+            <property value="AlaskaPriceBean" name="id"/>
+            <property value="com.mulesoft.training.airportticketprice.SimpleTicketPriceImpl" name="class"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property value="priceMap" name="name"/>
+                <property-collection name="@http://www.springframework.org/schema/beans/map;1">
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;2">
+                        <property value="KOA" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="1850" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;3">
+                        <property value="SFO" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="375" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;4">
+                        <property value="OAK" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="285" name=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="@http://www.springframework.org/schema/beans/entry;1">
+                        <property value="LAX" name="key"/>
+                        <property-collection name="@http://www.springframework.org/schema/beans/value;1">
+                            <property value="578" name=""/>
+                        </property-collection>
+                    </property-collection>
+                </property-collection>
+            </property-collection>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="AirportTicketPriceFlow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="c88de5fd-2c8f-450f-9e12-629be70dd7de">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="PriceAggregatorRequest" entity-id="65a5c4b0-3dc4-43da-8a9e-0e3dbbf0618c">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="http://localhost:8444" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log input payload" entity-id="42976386-138d-4a90-ace6-70dff833a8df">
+                <properties>
+                    <property value="Payload BEFORE is: #[payload:]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <splitter type="org.mule.tooling.ui.modules.core.pattern.all" name="All" entity-id="14fb7564-c2c7-4cd7-936d-078a63655112">
+                <pattern type="org.mule.tooling.ui.modules.core.pattern.all" name="All" entity-id="343c268e-58ff-4260-bd2c-7f5980f5e065"/>
+                <compartment entity-id="10b2a202-a7fb-452a-be02-310f0c99c207">
+                    <lane entity-id="615772b1-4d7d-47bf-9330-9d1cc768114a">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="UnitedAirlinesPriceRequest" entity-id="09e2e573-75c0-41a1-8b56-c3db72e53b1b">
+                            <properties>
+<property value="one-way" name="exchange-pattern"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property name="httpLabel"/>
+<property name="host"/>
+<property name="port"/>
+<property name="path"/>
+<property name="method"/>
+<property value="http://localhost:8050/price" name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="followRedirects"/>
+<property name="ref"/>
+<property name="connector-ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane entity-id="aae473bb-a91e-4703-8000-03ba611318c4">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="DeltaAirlinesPriceRequest" entity-id="6a55ffdb-6dab-4aeb-91f7-23cc1065179d">
+                            <properties>
+<property value="one-way" name="exchange-pattern"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property name="httpLabel"/>
+<property name="host"/>
+<property name="port"/>
+<property name="path"/>
+<property name="method"/>
+<property value="http://localhost:8051/price" name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="followRedirects"/>
+<property name="ref"/>
+<property name="connector-ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane entity-id="cccc8ac9-573d-4d14-a888-948580ab0c58">
+                        <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="AlaskaAirlinesPriceRequest" entity-id="8f5f939b-02cf-42ba-81fb-c94369496eec">
+                            <properties>
+<property value="one-way" name="exchange-pattern"/>
+<property value="request-response" name="exchange-pattern"/>
+<property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+<property name="httpLabel"/>
+<property name="host"/>
+<property name="port"/>
+<property name="path"/>
+<property name="method"/>
+<property value="http://localhost:8052/price" name="address"/>
+<property name="responseTimeout"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType"/>
+<property name="followRedirects"/>
+<property name="ref"/>
+<property name="connector-ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern type="org.mule.tooling.ui.modules.core.pattern.logger" name="Log output payload" entity-id="20225ce1-7a19-4843-8aa7-e1f8684c94ac">
+                <properties>
+                    <property value="Payload AFTER is: #[payload:]" name="message"/>
+                    <property value="INFO" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="UnitedPriceService">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="e82a29c7-f458-43d1-8877-732feebe8830">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="4327ab80-5801-4a84-9f2f-f4b02f2d8275">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="http://localhost:8050/price" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="CalculateAirportCodePrice" entity-id="a31db705-e782-4045-8142-6d5fce13c269">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/spring-object;0">
+                        <property value="UnitedPriceBean" name="bean"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="TransformResponse" entity-id="368c60bf-9dd6-42d9-b7ea-c1b4cc0357d0">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="groovy" name="evaluator"/>
+                    <property value="'$' + payload + ' (USD) United Airlines'" name="expression"/>
+                    <property name="custom-evaluator"/>
+                    <property name="returnSourceIfNull"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="DeltaPriceService">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="f3e8ec5f-e06e-40b8-8bf4-c369c44068c9">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="1153a0de-2973-44d6-9fac-54814c03bbf5">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="http://localhost:8051/price" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="CalculateAirportCodePrice" entity-id="f823c11d-6d4d-4734-ab04-4e32d5388877">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/spring-object;0">
+                        <property value="DeltaPriceBean" name="bean"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="TransformResponse" entity-id="23a5505c-83c1-41cc-aec3-bcc4e7d1df34">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="groovy" name="evaluator"/>
+                    <property value="'$' + payload + ' (USD) Delta Airlines'" name="expression"/>
+                    <property name="custom-evaluator"/>
+                    <property name="returnSourceIfNull"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="AlaskaPriceService">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="bb01c16b-f669-4cb0-9507-3f093a83e0e6">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="4b712fc5-8afa-446b-b6ca-fee0909a01c5">
+                <properties>
+                    <property value="one-way" name="exchange-pattern"/>
+                    <property value="request-response" name="exchange-pattern"/>
+                    <property value="http://www.mulesoft.org/schema/mule/http/endpoint" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property value="http://localhost:8052/price" name="address"/>
+                    <property name="responseTimeout"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="followRedirects"/>
+                    <property name="ref"/>
+                    <property name="connector-ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="CalculateAirportCodePrice" entity-id="f1118a86-6791-403b-ac59-bd51e100b20c">
+                <properties>
+                    <property name="class"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/spring-object;0">
+                        <property value="AlaskaPriceBean" name="bean"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="TransformResponse" entity-id="82e2b3f4-b5eb-4ddc-9a99-53a0aab3e69d">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property value="groovy" name="evaluator"/>
+                    <property value="'$' + payload + ' (USD) Alaska Airlines'" name="expression"/>
+                    <property name="custom-evaluator"/>
+                    <property name="returnSourceIfNull"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>
